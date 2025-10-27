@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small-World Networks | Social Network Analysis</title>
+    <meta name="description" content="Interactive presentation on Watts-Strogatz Small-World Network Model">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">SNA Projects</div>
+            <ul class="nav-menu">
+                <li><a href="#presentation" class="nav-link">Presentation</a></li>
+                <li><a href="#code" class="nav-link">Code</a></li>
+                <li><a href="#visualizations" class="nav-link">Visualizations</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Selector -->
+    <section class="project-selector">
+        <div class="container">
+            <h2 class="selector-title">Select Assignment</h2>
+            <div class="project-tabs">
+                <button class="project-tab active" data-project="small-world">
+                    <div class="tab-icon">🌐</div>
+                    <div class="tab-content">
+                        <h3>Small-World Networks</h3>
+                        <p>Watts-Strogatz Model</p>
+                    </div>
+                </button>
+                <button class="project-tab" data-project="email-network">
+                    <div class="tab-icon">📧</div>
+                    <div class="tab-content">
+                        <h3>Email Network Analysis</h3>
+                        <p>EU-Core Dataset Project</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Small World Project Content -->
+    <div id="small-world-project" class="project-content active">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Small-World Networks</span>
+            </h1>
+            <p class="hero-subtitle">Exploring the Watts-Strogatz Model</p>
+            <p class="hero-description">
+                Discover how social networks exhibit both high clustering and short path lengths,
+                creating the famous "six degrees of separation" phenomenon.
+            </p>
+            <div class="hero-buttons">
+                <a href="#presentation" class="btn btn-primary">View Presentation</a>
+                <a href="#code" class="btn btn-secondary">Explore Code</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="network-animation"></div>
+        </div>
+    </section>
+
+    <!-- Presentation Section -->
+    <section id="presentation" class="section">
+        <div class="container">
+            <h2 class="section-title">Presentation</h2>
+            <p class="section-description">
+                View or download the complete PowerPoint presentation on Small-World Networks
+            </p>
+            
+            <div class="presentation-card">
+                <div class="presentation-info">
+                    <div class="presentation-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4A90E2" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Small-World Network Model</h3>
+                        <p>Comprehensive presentation covering theory, implementation, and applications</p>
+                    </div>
+                </div>
+                <a href="SmalWrld.pptx" download class="btn btn-download">
+                    <span>Download PowerPoint</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Office 365 Viewer Embed -->
+            <div class="presentation-viewer">
+                <iframe 
+                    src="https://view.officeapps.live.com/op/embed.aspx?src=YOUR_GITHUB_PAGES_URL/SmalWrld.pptx"
+                    frameborder="0">
+                </iframe>
+                <div class="viewer-note">
+                    📝 <strong>Note:</strong> After deploying to GitHub Pages, replace 'YOUR_GITHUB_PAGES_URL' with your actual URL in the HTML file
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Section -->
+    <section id="code" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Source Code</h2>
+            <p class="section-description">
+                Python implementation of the Watts-Strogatz Small-World Network Model
+            </p>
+
+            <div class="code-tabs">
+                <button class="code-tab active" data-tab="implementation">Implementation</button>
+                <button class="code-tab" data-tab="visualization">Visualization</button>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="code-filename">SmallWrld.py</span>
+                    <button class="btn-copy" onclick="copyCode()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                </div>
+                
+                <div class="code-content" id="implementation">
+<pre><code class="language-python">import networkx as nx
+import matplotlib.pyplot as plt
+import matplotlib.lines as mlines
+import random
+
+def watts_strogatz_graph(n, k, p):
+    """
+    Generates a Watts-Strogatz small-world graph.
+
+    Args:
+        n (int): The number of nodes.
+        k (int): Each node is joined with its `k` nearest neighbors 
+                 in a ring topology. `k` must be an even integer.
+        p (float): The probability of rewiring each edge.
+
+    Returns:
+        networkx.Graph: The generated small-world graph.
+    """
+    if k % 2 != 0:
+        raise ValueError("k must be an even integer.")
+    if not 0 <= p <= 1:
+        raise ValueError("p must be between 0 and 1.")
+
+    # 1. START: Create a regular ring lattice
+    G = nx.Graph()
+    nodes = list(range(n))
+    G.add_nodes_from(nodes)
+
+    # Connect each node to its k nearest neighbors
+    for i in range(n):
+        for j in range(1, k // 2 + 1):
+            neighbor = (i + j) % n
+            G.add_edge(i, neighbor)
+            
+    initial_edges = set(G.edges())
+
+    # 2. EVOLVE: Rewire edges with probability p
+    for u, v in list(initial_edges):
+        if random.random() < p:
+            # Choose a new node to connect to
+            possible_new_nodes = set(nodes) - {u} - set(nx.neighbors(G, u))
+            if not possible_new_nodes:
+                continue
+
+            new_v = random.choice(list(possible_new_nodes))
+            
+            # Rewire the edge
+            G.remove_edge(u, v)
+            G.add_edge(u, new_v)
+
+    return G, initial_edges</code></pre>
+                </div>
+
+                <div class="code-content hidden" id="visualization">
+<pre><code class="language-python"># --- Parameters for the model ---
+N = 20  # Number of nodes
+K = 4   # Number of nearest neighbors for the initial ring
+P_small = 0.2 # Small rewiring probability for the "sweet spot"
+
+# --- Generate all three graphs ---
+print("Generating graphs for the demonstration...")
+regular_graph, _ = watts_strogatz_graph(N, K, 0)
+small_world_graph, initial_edges = watts_strogatz_graph(N, K, P_small)
+random_graph, _ = watts_strogatz_graph(N, K, 1)
+
+# --- Visualizations ---
+pos = nx.circular_layout(regular_graph)
+
+# 1. Regular Network (p=0)
+plt.figure(figsize=(8, 8))
+plt.title("1. Regular Network (p=0)", fontsize=16)
+nx.draw(regular_graph, pos, with_labels=True, 
+        node_color='skyblue', node_size=700, edge_color='gray')
+plt.show()
+
+# 2. Small-World Graph (The "Sweet Spot")
+plt.figure(figsize=(8, 8))
+plt.title(f"2. The 'Sweet Spot' (p={P_small})", fontsize=16)
+
+# Identify original vs rewired edges
+original_edges = [edge for edge in small_world_graph.edges() 
+                  if edge in initial_edges or (edge[1], edge[0]) in initial_edges]
+rewired_edges = [edge for edge in small_world_graph.edges() 
+                 if edge not in original_edges and (edge[1], edge[0]) not in original_edges]
+
+# Draw with different colors for rewired shortcuts
+nx.draw_networkx_nodes(small_world_graph, pos, node_color='skyblue', node_size=700)
+nx.draw_networkx_labels(small_world_graph, pos)
+nx.draw_networkx_edges(small_world_graph, pos, edgelist=original_edges, 
+                       edge_color='gray', width=1.5)
+nx.draw_networkx_edges(small_world_graph, pos, edgelist=rewired_edges, 
+                       edge_color='red', width=2.0, style='dashed')
+
+# Legend
+red_dashed_line = mlines.Line2D([], [], color='red', linestyle='--', 
+                                linewidth=2, label='Rewired Shortcuts')
+plt.legend(handles=[red_dashed_line], loc='upper right')
+plt.show()
+
+# 3. Random Network (p=1)
+plt.figure(figsize=(8, 8))
+plt.title("3. Random Network (p=1)", fontsize=16)
+nx.draw(random_graph, pos, with_labels=True, 
+        node_color='skyblue', node_size=700, edge_color='gray')
+plt.show()</code></pre>
+                </div>
+            </div>
+
+            <div class="download-code">
+                <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank" class="btn btn-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizations Section -->
+    <section id="visualizations" class="section">
+        <div class="container">
+            <h2 class="section-title">Network Visualizations</h2>
+            <p class="section-description">
+                Visual comparison of network topologies across different rewiring probabilities
+            </p>
+
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <div class="viz-image">
+                        <img src="images/regular_network.png" alt="Regular Network" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Regular Network</h3>
+                        <div class="viz-params">
+                            <span class="param"><strong>p</strong> = 0</span>
+                            <span class="param"><strong>N</strong> = 20</span>
+                            <span class="param"><strong>K</strong> = 4</span>
+                        </div>
+                        <p>Highly clustered with long path lengths. Each node connects to nearest neighbors in a ring.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card featured">
+                    <div class="featured-badge">Sweet Spot</div>
+                    <div class="viz-image">
+                        <img src="images/small_world_network.png" alt="Small-World Network" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Small-World Network</h3>
+                        <div class="viz-params">
+                            <span class="param"><strong>p</strong> = 0.2</span>
+                            <span class="param"><strong>N</strong> = 20</span>
+                            <span class="param"><strong>K</strong> = 4</span>
+                        </div>
+                        <p>The optimal balance: high clustering with short path lengths. Red dashed lines show rewired shortcuts.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card">
+                    <div class="viz-image">
+                        <img src="images/random_network.png" alt="Random Network" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Random Network</h3>
+                        <div class="viz-params">
+                            <span class="param"><strong>p</strong> = 1</span>
+                            <span class="param"><strong>N</strong> = 20</span>
+                            <span class="param"><strong>K</strong> = 4</span>
+                        </div>
+                        <p>Low clustering with short path lengths. All edges have been randomly rewired.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">About This Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>The Watts-Strogatz Model</h3>
+                    <p>
+                        The small-world network model, introduced by Duncan Watts and Steven Strogatz in 1998, 
+                        explains how real-world networks can have both high clustering (like regular networks) 
+                        and short average path lengths (like random networks).
+                    </p>
+                    <p>
+                        This phenomenon explains the "six degrees of separation" concept and is observed in 
+                        social networks, neural networks, power grids, and the internet.
+                    </p>
+                    
+                    <h3>Implementation Details</h3>
+                    <ul class="feature-list">
+                        <li>Built with Python 3.13, NetworkX, and Matplotlib</li>
+                        <li>Interactive visualizations showing network evolution</li>
+                        <li>Configurable parameters (N, K, p) for experimentation</li>
+                        <li>Clear distinction between original and rewired edges</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Nodes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Neighbors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0.2</div>
+                        <div class="stat-label">Rewiring Prob.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    <!-- End Small World Project -->
+
+    <!-- Email Network Project Content -->
+    <div id="email-network-project" class="project-content">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Email Network Analysis</span>
+            </h1>
+            <p class="hero-subtitle">Exploring the EU-Core Email Dataset</p>
+            <p class="hero-description">
+                Comprehensive network analysis of a large European research institution's email communication,
+                including community detection, link analysis, influence scoring, anomaly detection, and link prediction.
+            </p>
+            <div class="hero-buttons">
+                <a href="#email-overview" class="btn btn-primary">View Analysis</a>
+                <a href="#email-visualizations" class="btn btn-secondary">Explore Results</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="network-animation"></div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="email-overview" class="section">
+        <div class="container">
+            <h2 class="section-title">Network Overview</h2>
+            <p class="section-description">
+                Comprehensive analysis of email communication patterns in a large European research institution spanning 18 months
+            </p>
+            
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">1,005</div>
+                    <div class="metric-label">Network Nodes</div>
+                    <div class="metric-desc">Individual email addresses representing researchers and staff members</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">25,571</div>
+                    <div class="metric-label">Email Exchanges</div>
+                    <div class="metric-desc">Directed communication links between members over the observation period</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">50.88</div>
+                    <div class="metric-label">Average Degree</div>
+                    <div class="metric-desc">Mean number of unique communication partners per individual</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5.06%</div>
+                    <div class="metric-label">Network Density</div>
+                    <div class="metric-desc">Ratio of existing connections to all possible connections in the network</div>
+                </div>
+            </div>
+
+            <!-- Network Characteristics -->
+            <div class="content-block">
+                <h3>Dataset Characteristics</h3>
+                <p>This dataset represents a real-world email communication network from a large European research institution. The network is directed, meaning email exchanges have a specific sender and receiver. With over 1,000 members and 25,000+ communications, this network exhibits typical characteristics of organizational communication patterns:</p>
+                <ul class="feature-list">
+                    <li><strong>Scale-free properties:</strong> A few highly connected hubs with many peripheral nodes</li>
+                    <li><strong>Small-world characteristics:</strong> Short average path lengths despite low overall density</li>
+                    <li><strong>Community structure:</strong> Natural clustering based on research groups and departments</li>
+                    <li><strong>Hierarchical organization:</strong> Varying levels of influence and centrality across members</li>
+                </ul>
+            </div>
+
+            <!-- Visualizations -->
+            <h3 class="subsection-title">Network Topology</h3>
+            <div class="viz-grid-2col">
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/subgraph.png" alt="Network Subgraph" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Network Subgraph Sample</h3>
+                        <p>A representative subgraph showing the interconnected nature of email communications. Nodes represent individual email addresses, while edges indicate email exchanges. The layout reveals natural clustering patterns and hub nodes with high connectivity.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/degree_distribution.png" alt="Degree Distribution" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Degree Distribution Analysis</h3>
+                        <p>The degree distribution follows a power-law pattern typical of social networks. Most members have moderate connectivity (20-80 connections), while a small number of highly active members maintain 100+ connections, serving as communication hubs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Link Analysis Section -->
+    <section id="email-link-analysis" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Link Analysis & Centrality</h2>
+            <p class="section-description">
+                Identifying influential nodes using PageRank and Eigenvector Centrality algorithms
+            </p>
+
+            <div class="content-block">
+                <h3>Understanding Network Centrality</h3>
+                <p>Link analysis reveals which members play crucial roles in the communication network. We employ two complementary centrality measures:</p>
+                <div class="algorithm-grid">
+                    <div class="algorithm-card">
+                        <h4>PageRank Centrality</h4>
+                        <p>Originated from Google's web search algorithm, PageRank identifies influential nodes based on both the quantity and quality of incoming connections. A node is important if it receives emails from other important nodes.</p>
+                    </div>
+                    <div class="algorithm-card">
+                        <h4>Eigenvector Centrality</h4>
+                        <p>Measures the influence of a node based on the influence of its neighbors. Nodes connected to highly-connected neighbors score higher, revealing members embedded in influential network regions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Centrality Analysis Results</h3>
+            <div class="viz-grid-2col">
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/link_analysis_top_pagerank.png" alt="PageRank Analysis" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Top Nodes by PageRank</h3>
+                        <p>Bar chart showing the most influential members ranked by PageRank scores. These individuals serve as key information brokers and likely hold administrative or coordinating roles within the institution.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/link_analysis_view.png" alt="Link Analysis View" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Network Centrality Visualization</h3>
+                        <p>Graph visualization with node sizes proportional to their PageRank scores. Larger nodes represent more influential members who act as communication hubs in the network.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="project_finl_outputs/link_analysis.csv" download class="btn btn-download">
+                    <span>Download Complete Link Analysis Data (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Detection Section -->
+    <section id="email-communities" class="section">
+        <div class="container">
+            <h2 class="section-title">Community Detection</h2>
+            <p class="section-description">
+                Discovering natural clusters in the email network using Label Propagation
+            </p>
+
+            <div class="content-block">
+                <h3>Label Propagation Algorithm</h3>
+                <p>Community detection reveals the underlying organizational structure of the email network. We use the asynchronous Label Propagation algorithm, which identifies groups of nodes that communicate more frequently with each other than with the rest of the network.</p>
+                <div class="info-box">
+                    <h4>Algorithm Process</h4>
+                    <ol class="algorithm-steps">
+                        <li>Each node is initialized with a unique label</li>
+                        <li>Nodes iteratively adopt the most common label among their neighbors</li>
+                        <li>The process continues until labels stabilize</li>
+                        <li>Nodes with the same final label form a community</li>
+                    </ol>
+                    <p><strong>Result:</strong> The algorithm identified distinct communities corresponding to research departments, project teams, and administrative units within the institution.</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Community Structure Analysis</h3>
+            <div class="viz-card-full-width">
+                <div class="viz-image-full">
+                    <img src="project_finl_outputs/community_view.png" alt="Community Detection" loading="lazy">
+                </div>
+                <div class="viz-info">
+                    <h3>Community Visualization</h3>
+                    <p>Network graph colored by community membership. Each color represents a distinct community. The visualization reveals clear clustering patterns with dense intra-community connections and sparser inter-community links, validating the modular structure of the organization.</p>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="project_finl_outputs/node_classification_labels.csv" download class="btn btn-download">
+                    <span>Download Community Labels Dataset (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Influence Analysis Section -->
+    <section id="email-influence" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Influence Analysis</h2>
+            <p class="section-description">
+                Combining PageRank and Betweenness Centrality to quantify member influence
+            </p>
+
+            <div class="content-block">
+                <h3>Multi-Metric Influence Scoring</h3>
+                <p>True influence in a network comes from multiple dimensions. We combine two complementary centrality measures to create a comprehensive influence score:</p>
+                <div class="algorithm-grid">
+                    <div class="algorithm-card">
+                        <h4>PageRank Influence</h4>
+                        <p><strong>What it measures:</strong> Prestige and authority within the network</p>
+                        <p><strong>Interpretation:</strong> High PageRank indicates receiving communications from other influential members</p>
+                    </div>
+                    <div class="algorithm-card">
+                        <h4>Betweenness Centrality</h4>
+                        <p><strong>What it measures:</strong> Information brokerage and control</p>
+                        <p><strong>Interpretation:</strong> High betweenness indicates serving as a bridge between different network regions</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <p><strong>Combined Influence Score</strong> = 0.5 × (Normalized PageRank) + 0.5 × (Normalized Betweenness)</p>
+                    <p>This balanced approach identifies both prestigious members and critical connectors in the communication network.</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Influence Distribution</h3>
+            <div class="viz-grid-2col">
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/influence_top.png" alt="Top Influential Nodes" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Top 20 Most Influential Members</h3>
+                        <p>Ranked visualization of the most influential members in the network. These individuals combine high prestige with strategic network positions, making them key players in organizational communication and decision-making processes.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/influence_view.png" alt="Influence Network View" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Influence-Weighted Network</h3>
+                        <p>Network visualization with node sizes proportional to influence scores. The spatial distribution reveals how influential members are distributed across different communities and their strategic positioning in the overall network structure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="project_finl_outputs/influence_scores.csv" download class="btn btn-download">
+                    <span>Download Complete Influence Scores (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anomaly Detection Section -->
+    <section id="email-anomalies" class="section">
+        <div class="container">
+            <h2 class="section-title">Anomaly Detection</h2>
+            <p class="section-description">
+                Identifying unusual communication patterns using Isolation Forest
+            </p>
+
+            <div class="content-block">
+                <h3>Detecting Anomalous Behavior</h3>
+                <p>Anomaly detection reveals members with unusual communication patterns that deviate significantly from normal network behavior. These outliers may represent:</p>
+                <ul class="feature-list">
+                    <li><strong>Automated systems:</strong> Bots or mailing lists with abnormal sending patterns</li>
+                    <li><strong>External collaborators:</strong> Individuals with limited internal connections</li>
+                    <li><strong>Isolated specialists:</strong> Experts with unique communication profiles</li>
+                    <li><strong>Data quality issues:</strong> Potential errors in data collection</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>Isolation Forest Algorithm</h4>
+                    <p>We use Isolation Forest, an unsupervised machine learning algorithm that identifies anomalies by measuring how easily observations can be isolated from the rest of the data.</p>
+                    <p><strong>Features Used:</strong> Degree centrality, betweenness centrality, closeness centrality, clustering coefficient, and PageRank</p>
+                    <p><strong>Contamination Rate:</strong> 5% (assuming ~50 anomalous nodes in the network)</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Anomaly Analysis Results</h3>
+            <div class="viz-grid-2col">
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/anomaly_scatter.png" alt="Anomaly Scatter Plot" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Anomaly Score Distribution</h3>
+                        <p>Scatter plot showing the distribution of anomaly scores across network members. Red points indicate detected anomalies. The visualization reveals clear separation between normal members and outliers based on their structural network properties.</p>
+                    </div>
+                </div>
+
+                <div class="viz-card-enhanced">
+                    <div class="viz-image-full">
+                        <img src="project_finl_outputs/anomaly_view.png" alt="Anomaly Network View" loading="lazy">
+                    </div>
+                    <div class="viz-info">
+                        <h3>Anomalous Nodes in Network Context</h3>
+                        <p>Network graph with anomalous nodes highlighted in red. Most anomalies appear at the network periphery with unusual connectivity patterns, while some occupy strategic positions with atypical centrality profiles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="project_finl_outputs/anomalies.csv" download class="btn btn-download">
+                    <span>Download Anomaly Detection Results (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Link Prediction Section -->
+    <section id="email-prediction" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Link Prediction</h2>
+            <p class="section-description">
+                Forecasting future email connections using graph-based features and machine learning
+            </p>
+
+            <div class="content-block">
+                <h3>Predicting Future Connections</h3>
+                <p>Link prediction addresses the question: "Which members are likely to start communicating who haven't yet?" This has practical applications in:</p>
+                <ul class="feature-list">
+                    <li><strong>Collaboration recommendations:</strong> Suggesting potential research partners</li>
+                    <li><strong>Network growth modeling:</strong> Understanding how communication networks evolve</li>
+                    <li><strong>Resource allocation:</strong> Anticipating future communication infrastructure needs</li>
+                    <li><strong>Team formation:</strong> Identifying promising cross-departmental collaborations</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>Prediction Methodology</h4>
+                    <p><strong>Features Extracted:</strong> For each potential node pair (u, v), we compute:</p>
+                    <ul class="algorithm-steps">
+                        <li>Common Neighbors: Number of shared connections</li>
+                        <li>Jaccard Coefficient: Normalized measure of neighborhood overlap</li>
+                        <li>Adamic-Adar Index: Weighted common neighbors emphasizing rare connections</li>
+                        <li>Preferential Attachment: Product of node degrees (rich-get-richer effect)</li>
+                        <li>Resource Allocation: Flow-based similarity measure</li>
+                    </ul>
+                    <p><strong>Classifier:</strong> Random Forest with 100 estimators trained on 80% of data, tested on 20%</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Model Performance</h3>
+            <div class="viz-card-full-width">
+                <div class="viz-image-full">
+                    <img src="project_finl_outputs/link_prediction_roc_final.png" alt="ROC Curve" loading="lazy">
+                </div>
+                <div class="viz-info">
+                    <h3>ROC Curve Analysis</h3>
+                    <p>The Receiver Operating Characteristic (ROC) curve evaluates the model's ability to distinguish between true future connections and non-connections across all classification thresholds. The Area Under Curve (AUC) quantifies overall model performance, with values closer to 1.0 indicating better prediction accuracy. Our model demonstrates strong predictive power, significantly outperforming random guessing (AUC = 0.5).</p>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="project_finl_outputs/link_prediction_scores.csv" download class="btn btn-download">
+                    <span>Download Prediction Scores for All Node Pairs (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+                <a href="project_finl_outputs/link_prediction_auc.csv" download class="btn btn-download">
+                    <span>Download Model AUC Score (CSV)</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Section -->
+    <section id="email-code" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Source Code</h2>
+            <p class="section-description">
+                Implementation of comprehensive network analysis
+            </p>
+
+            <div class="code-section">
+                <div class="code-header">
+                    <h3>📂 project.py</h3>
+                    <button class="btn-copy" onclick="copyCode('email-code-content')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Code
+                    </button>
+                </div>
+                <pre><code id="email-code-content">import networkx as nx
+import pandas as pd
+from sklearn.metrics import roc_auc_score
+from sklearn.ensemble import IsolationForest
+
+def load_graph() -> nx.Graph:
+    """Load the Email-EU-core network dataset"""
+    G = nx.read_edgelist("email-Eu-core.txt", 
+                        create_using=nx.Graph(), 
+                        nodetype=int)
+    return G
+
+def task_link_analysis(G: nx.Graph, topk: int = 20):
+    """Link Analysis: PageRank and Eigenvector centrality"""
+    pr = nx.pagerank(G)
+    ev = nx.eigenvector_centrality(G, max_iter=1000)
+    
+    df = pd.DataFrame({
+        "node": list(pr.keys()),
+        "pagerank": list(pr.values()),
+        "eigenvector": [ev[n] for n in pr.keys()],
+        "degree": [G.degree(n) for n in pr.keys()],
+    }).sort_values("pagerank", ascending=False)
+    
+    return df
+
+def task_node_classification(G: nx.Graph):
+    """Community Detection via Label Propagation"""
+    comms = list(nx.algorithms.community.asyn_lpa_communities(G))
+    node2comm = {}
+    for cid, nodes in enumerate(comms):
+        for n in nodes:
+            node2comm[n] = cid
+    return node2comm
+
+def task_influence(G: nx.Graph):
+    """Influence Analysis: PageRank and Betweenness"""
+    pr = nx.pagerank(G)
+    bt = nx.betweenness_centrality(G, normalized=True)
+    
+    df = pd.DataFrame({
+        "node": list(pr.keys()),
+        "pagerank": list(pr.values()),
+        "betweenness": [bt[n] for n in pr.keys()],
+    }).sort_values(["pagerank", "betweenness"], ascending=False)
+    
+    return df
+
+def task_anomaly_detection(G: nx.Graph, contamination=0.01):
+    """Anomaly Detection using IsolationForest"""
+    degrees = dict(G.degree())
+    clustering = nx.clustering(G)
+    avg_neigh_deg = nx.average_neighbor_degree(G)
+    
+    X = [[degrees[n], clustering[n], avg_neigh_deg[n]] 
+         for n in G.nodes()]
+    
+    iso = IsolationForest(n_estimators=300, 
+                         contamination=contamination)
+    anomaly_scores = iso.fit_predict(X)
+    
+    return anomaly_scores
+
+def task_link_prediction(G: nx.Graph):
+    """Link Prediction: Adamic-Adar, Jaccard, Preferential Attachment"""
+    # Split edges for train/test
+    # Compute similarity scores
+    # Evaluate with ROC-AUC
+    aa_scores = nx.adamic_adar_index(G, ebunch)
+    jc_scores = nx.jaccard_coefficient(G, ebunch)
+    
+    return scores, auc</code></pre>
+            </div>
+
+            <div class="code-features">
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Network Analysis</h4>
+                    <p>Comprehensive graph metrics and statistics</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Community Detection</h4>
+                    <p>Label Propagation algorithm</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Link Prediction</h4>
+                    <p>ML-based future connection prediction</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚠️</div>
+                    <h4>Anomaly Detection</h4>
+                    <p>IsolationForest for outliers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="email-reports" class="section">
+        <div class="container">
+            <h2 class="section-title">Analysis Reports & Downloads</h2>
+            <p class="section-description">
+                Comprehensive documentation, datasets, and exportable files for further analysis
+            </p>
+
+            <!-- Main Reports -->
+            <div class="reports-category">
+                <div class="category-header">
+                    <div class="category-line"></div>
+                    <h3 class="category-title">Documentation</h3>
+                    <div class="category-line"></div>
+                </div>
+                
+                <div class="reports-grid-modern">
+                    <a href="project_finl_outputs/report_final.pdf" class="report-card-modern report-primary" download>
+                        <div class="report-header">
+                            <div class="report-type-badge">PDF</div>
+                            <span class="report-featured">Recommended</span>
+                        </div>
+                        <h3>Final Analysis Report</h3>
+                        <p>Complete comprehensive analysis including all findings, visualizations, methodology, and conclusions</p>
+                        <div class="report-meta">
+                            <span class="meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                                Full Report
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Data Files -->
+            <div class="reports-category">
+                <div class="category-header">
+                    <div class="category-line"></div>
+                    <h3 class="category-title">Data Exports</h3>
+                    <div class="category-line"></div>
+                </div>
+                
+                <div class="data-exports-grid">
+                    <a href="project_finl_outputs/link_analysis.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Link Analysis</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/node_classification_labels.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Community Labels</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/influence_scores.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Influence Scores</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/anomalies.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Anomalies</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/link_prediction_scores.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Link Prediction Scores</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/link_prediction_auc.csv" class="data-export-card" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Model Performance (AUC)</h4>
+                            <span class="export-format">CSV</span>
+                        </div>
+                    </a>
+
+                    <a href="project_finl_outputs/graph_attributes.gexf" class="data-export-card export-special" download>
+                        <div class="export-icon-wrapper">
+                            <svg class="export-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2"></path>
+                            </svg>
+                        </div>
+                        <div class="export-info">
+                            <h4>Network Graph</h4>
+                            <span class="export-format special">GEXF</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bulk Download -->
+            <div class="bulk-download-wrapper">
+                <button class="btn-bulk-download" onclick="downloadAllReports()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    Download All Files
+                </button>
+                <p class="bulk-note">Downloads all documentation and data files</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section for Email Network -->
+    <section id="about" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">About This Analysis</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Email EU-Core Dataset</h3>
+                    <p>
+                        This project analyzes an email communication network from a large European research institution.
+                        The network represents email exchanges between institution members, revealing organizational
+                        structure and communication patterns.
+                    </p>
+                    
+                    <h3>Analysis Components</h3>
+                    <ul class="feature-list">
+                        <li>Network overview and basic statistics</li>
+                        <li>Community detection and clustering</li>
+                        <li>Centrality analysis (degree, betweenness, closeness)</li>
+                        <li>Link prediction and recommendations</li>
+                        <li>Node classification and influence scoring</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1,005</div>
+                        <div class="stat-label">Nodes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">25K+</div>
+                        <div class="stat-label">Edges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50.88</div>
+                        <div class="stat-label">Avg Degree</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    <!-- End Email Network Project -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-author">
+                <h3>Priyansh Kumar Paswan</h3>
+                <p class="footer-roll">Roll Number: 205124071</p>
+                <p class="footer-institution">National Institute of Technology Tiruchirappalli</p>
+                <p class="footer-course">Social Network Analysis | 3rd Semester Assignment</p>
+            </div>
+            <div class="footer-divider"></div>
+            <p>Social Network Analysis Project | Small-World Networks</p>
+            <p class="footer-tech">Built with Python, NetworkX, and modern web technologies</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
