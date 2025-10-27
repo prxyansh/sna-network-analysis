@@ -1,27 +1,23 @@
 # Social Network Analysis Projects
 
-A comprehensive collection of network analysis projects featuring **Small-World Networks** and **Email Network Analysis** with beautiful visualizations, interactive code, and a modern web presentation.
+Two comprehensive network analysis projects: **Small-World Networks** (Watts-Strogatz Model) and **Email Network Analysis** (EU Research Institution).
 
 ## 🌐 Live Website
 
-**Visit the live demo**: `https://prxyansh.github.io/sna-network-analysis/`
-
-![Network Analysis](website/images/small_world_network.png)
+https://prxyansh.github.io/sna-network-analysis/
 
 ## 📋 Project Overview
 
-This repository contains two major social network analysis projects:
-
 ### 1. Small-World Networks (Watts-Strogatz Model)
-Explores the fascinating phenomenon of "six degrees of separation" through the Watts-Strogatz model, demonstrating how networks transition from regular lattices to random networks while maintaining small-world properties.
+Explores the "six degrees of separation" phenomenon through the Watts-Strogatz model, demonstrating how networks transition from regular lattices to random networks while maintaining small-world properties.
 
 ### 2. Email Network Analysis (EU Research Institution)
-Comprehensive analysis of real-world email communication patterns in a large European research institution, featuring:
-- **Link Analysis**: PageRank and Eigenvector Centrality
-- **Community Detection**: Label Propagation Algorithm
-- **Influence Scoring**: Multi-metric influence analysis
-- **Anomaly Detection**: Isolation Forest for outlier identification
-- **Link Prediction**: Machine Learning-based connection forecasting
+Analysis of real-world email communication patterns in a large European research institution:
+- Link Analysis (PageRank, Eigenvector Centrality)
+- Community Detection (Label Propagation)
+- Influence Scoring (Multi-metric analysis)
+- Anomaly Detection (Isolation Forest)
+- Link Prediction (Machine Learning)
 
 ## 📁 Project Structure
 
@@ -112,42 +108,20 @@ SNA/
 ## 🎯 Features
 
 ### Small-World Networks
-- ✅ Complete Watts-Strogatz algorithm
-- ✅ Configurable parameters (N, K, p)
-- ✅ Network evolution visualization
-- ✅ Clustering coefficient analysis
-- ✅ Average path length calculations
+- Complete Watts-Strogatz algorithm implementation
+- Configurable parameters (N, K, p)
+- Network evolution visualization
+- Clustering coefficient analysis
+- Average path length calculations
 
 ### Email Network Analysis
-- ✅ **Dataset**: 1,005 nodes, 25,571 edges (EU research institution)
-- ✅ **Link Analysis**: PageRank & Eigenvector Centrality
-- ✅ **Community Detection**: Asynchronous Label Propagation
-- ✅ **Influence Scoring**: Combined PageRank + Betweenness
-- ✅ **Anomaly Detection**: Isolation Forest (5% contamination)
-- ✅ **Link Prediction**: Random Forest with 5 graph features (AUC scores)
-- ✅ **Comprehensive Visualizations**: 24 output files (PNGs, CSVs, GEXF)
-
-### Interactive Website
-- ✅ Modern gradient design with glass morphism
-- ✅ Dual-project tab switching interface
-- ✅ Rich content with algorithm explanations
-- ✅ Interactive particle background
-- ✅ Responsive design for all devices
-- ✅ Downloadable reports and datasets
-- ✅ Visual distinction between original and rewired edges
-- ✅ Support for three network types (regular, small-world, random)
-
-### Website Features
-- ✅ Beautiful, minimal design with smooth animations
-- ✅ Embedded PowerPoint presentation viewer
-- ✅ Interactive code display with syntax highlighting
-- ✅ Copy-to-clipboard functionality
-- ✅ Responsive design (mobile, tablet, desktop)
-- ✅ Network visualization gallery
-- ✅ Educational content and explanations
-- ✅ Download options for code and presentation
-
-### Visualizations
+- **Dataset**: 1,005 nodes, 25,571 edges
+- **Link Analysis**: PageRank & Eigenvector Centrality
+- **Community Detection**: Asynchronous Label Propagation
+- **Influence Scoring**: Combined PageRank + Betweenness
+- **Anomaly Detection**: Isolation Forest (5% contamination)
+- **Link Prediction**: Random Forest with graph features
+- **Output**: 24 files (PNGs, CSVs, GEXF)
 - ✅ Regular Network (p=0): High clustering, long paths
 - ✅ Small-World Network (p=0.2): The "sweet spot"
 - ✅ Random Network (p=1): Low clustering, short paths
